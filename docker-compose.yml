@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: auto
+    volumes:
+      - ./db-data/mongo/:data/db
+
+  auto_parser:
+    image: parser
+    container_name: auto_parser
+    command: python ./bin/parser/parser.py
+    ports:
+      - 8001:8001
+    depends_on:
+      - db
+    network_mode: host
+
+  data_analyser:
+    image: data-analytics
+    container_name: data-analyser
+    command: python ./bin/data-analytics/data_analytics.py
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    network_mode: host
