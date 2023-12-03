@@ -11,24 +11,19 @@ services:
     environment:
       MONGO_INITDB_DATABASE: auto
     volumes:
-      - ./db-data/mongo/:data/db
+      - ./db-data/mongo/:/data/db
 
   auto_parser:
     image: parser
     container_name: auto_parser
-    command: python ./bin/parser/parser.py
-    ports:
-      - 8001:8001
+    command: python ./src/parser/parser.py
     depends_on:
       - db
     network_mode: host
 
   data_analyser:
     image: data-analytics
-    container_name: data-analyser
-    command: python ./bin/data-analytics/data_analytics.py
-    ports:
-      - 8000:8000
+    command: python ./src/data-analytics/data_analytics.py
     depends_on:
       - db
     network_mode: host
