@@ -25,19 +25,6 @@ def duplicates_counter(lst):
             counter[item] = 1
     return counter
 
-# def duplicates_counter(lst):
-#     counter = {}
-#     if item in counter:
-#         counter[item] += 1
-#     else:
-#         counter[item] = 1
-#     return counter
-
-# def map(new_dict, document):
-#     for word in document:
-#         new_dict.duplicates_counter(document)
-#     return new_dict
-
 # Подключаемся к базе данных MongoDB
 client = MongoClient('127.0.0.1', 27017)
 db_name = 'auto'
